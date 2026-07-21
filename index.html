@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nova — Kalite & Kaynak Yönetimi Platformu</title>
+  <meta name="description" content="Nova ile kalite yönetimi (IATF 16949, ISO 9001) ve kurumsal kaynak planlamayı tek platformda birleştirin." />
+  <link rel="icon" type="image/svg+xml" href="logo-1.svg" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --nova-orange:#FF6B1A; --nova-blue:#1E6BFF; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Space Grotesk', system-ui, sans-serif; color:#fff; background: radial-gradient(120% 80% at 20% 0%, #111 0%, #000 45%, #000 100%); background-attachment: fixed; }
+    /* Aurora: yumusak sol-üst isik (sag alt KALDIRILDI) */
+    .aurora { position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none; }
+    .aurora::before {
+      content:''; position:absolute; width:55vmax; height:55vmax; border-radius:50%;
+      filter: blur(100px); opacity:.22; mix-blend-mode:screen;
+      background:var(--nova-orange); top:-20vmax; left:-14vmax; animation:float1 20s ease-in-out infinite;
+    }
+    .aurora::after { display:none; }
+    @keyframes float1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(10vmax,6vmax)} }
+    .nova-gradient { background: linear-gradient(135deg,var(--nova-orange) 0%, #C0421A 50%, var(--nova-blue) 100%); }
+    .text-nova-gradient { background: linear-gradient(135deg,var(--nova-orange) 0%, var(--nova-blue) 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .hero-glow { background: radial-gradient(ellipse 80% 60% at 50% -20%, rgba(255,107,26,0.16), transparent 60%); }
+    .card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); backdrop-filter: blur(8px); transition:all .35s cubic-bezier(.25,.46,.45,.94); position:relative; overflow:hidden; }
+    .card::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,107,26,0.14),transparent 60%); opacity:0; transition:opacity .35s; }
+    .card:hover { background:rgba(255,255,255,0.06); transform:translateY(-6px); border-color:rgba(255,107,26,0.28); }
+    .card:hover::before { opacity:1; }
+    .reveal { opacity:0; transform: translateY(28px); transition: opacity .8s cubic-bezier(.25,.46,.45,.94), transform .8s cubic-bezier(.25,.46,.45,.94); }
+    .reveal.show { opacity:1; transform:none; }
+    .pill { background: rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.1); }
+    ::selection { background:var(--nova-orange); color:#000; }
+    .marquee { display:flex; gap:3rem; animation: scroll 30s linear infinite; }
+    @keyframes scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    details summary::-webkit-details-marker { display:none; }
+    /* scroll progress bar (turuncu->mavi) */
+    .progress { position:fixed; top:0; left:0; height:3px; width:0%; background:linear-gradient(90deg,var(--nova-orange),var(--nova-blue)); z-index:60; }
+  </style>
+</head>
+<body class="antialiased">
+  <div class="aurora"></div>
+  <div class="progress" id="progress"></div>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="sticky top-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-4 flex items-center justify-between">
+      <a href="#top" class="flex items-center">
+        <img src="logo-1.svg" alt="NOVA Logo" class="h-9 w-auto" />
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-white/70">
+        <a href="#qms" class="hover:text-white transition">NOVA QMS</a>
+        <a href="#stdlib" class="hover:text-white transition">Standartlar</a>
+        <a href="#erp" class="hover:text-white transition">NOVA ERP</a>
+      </nav>
+      <a href="#signup" class="bg-nova-gradient text-black text-sm font-bold px-6 py-2.5 rounded-full transition hover:scale-105">
+        Ücretsiz Başla
+      </a>
+    </div>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section id="top" class="hero-glow">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 pt-20 pb-28">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Sol: metin -->
+        <div class="reveal">
+          <span class="inline-block pill text-xs font-semibold px-4 py-1.5 rounded-full mb-6">
+            🚗 IATF 16949 · ISO 9001 · TAM UYUMLU
+          </span>
+          <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-[1.02]">
+            Kaliteyi<br><span class="text-nova-gradient">dijitalleştir.</span><br>İşi tek çatıya al.
+          </h1>
+          <p class="text-lg text-white/60 max-w-lg mb-8">
+            <strong class="text-white/85">NOVA QMS</strong> ile IATF 16949 ve ISO 9001 uyumlu kalite yönetimi.
+            İsteyene <strong class="text-white/85">NOVA ERP</strong> ile iş süreçleri entegre — tek veri, tek platform.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a href="#signup" class="nova-gradient text-black font-bold px-7 py-3.5 rounded-full transition hover:scale-105" style="box-shadow:0 10px 30px -8px rgba(255,107,26,0.45)">
+              Ücretsiz Başla →
+            </a>
+            <a href="#qms" class="pill font-semibold px-7 py-3.5 rounded-full transition hover:bg-white/10 text-white">
+              Özellikleri Gör
+            </a>
+          </div>
+        </div>
+        <!-- Sağ: logo kartı -->
+        <div class="reveal">
+          <div class="relative mx-auto max-w-md">
+            <img src="logo-1.svg" alt="NOVA" class="w-full drop-shadow-[0_20px_60px_rgba(30,107,255,0.25)]" />
+          </div>
+        </div>
+      </div>
+
+      <!-- İstatistikler -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto mt-24">
+        <div class="reveal text-center">
+          <div class="text-4xl font-bold text-nova-gradient">100%</div>
+          <div class="text-xs text-white/50 mt-1">IATF 16949 Kapsamı</div>
+        </div>
+        <div class="reveal text-center">
+          <div class="text-4xl font-bold text-nova-gradient">AIAG</div>
+          <div class="text-xs text-white/50 mt-1">5 Çekirdek Araç</div>
+        </div>
+        <div class="reveal text-center">
+          <div class="text-4xl font-bold text-nova-gradient">ISO</div>
+          <div class="text-xs text-white/50 mt-1">9001 Uyumlu</div>
+        </div>
+        <div class="reveal text-center">
+          <div class="text-4xl font-bold text-nova-gradient">24/7</div>
+          <div class="text-xs text-white/50 mt-1">Bulut Erişim</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STANDARTLAR (marquee) ===================== -->
+  <section id="stdlib" class="border-y border-white/5 py-8 overflow-hidden">
+    <div class="marquee text-2xl font-extrabold text-white/30 whitespace-nowrap">
+      <span>IATF 16949 • ISO 9001 • APQP • PPAP • FMEA • MSA • SPC • 8D • CAPA • CSR •</span>
+      <span>IATF 16949 • ISO 9001 • APQP • PPAP • FMEA • MSA • SPC • 8D • CAPA • CSR •</span>
+    </div>
+  </section>
+
+  <!-- ===================== NOVA SUITE (ortak cati) ===================== -->
+  <section id="qms" class="py-24">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="max-w-3xl mb-16 reveal">
+        <img src="logo-1.svg" alt="" class="h-14 w-auto mb-5" />
+        <span class="font-semibold text-sm tracking-wide uppercase" style="color:var(--nova-orange)">NOVA SUITE</span>
+        <h2 class="text-4xl sm:text-6xl font-extrabold mt-3 mb-5 leading-tight">Tek çatı:<br>NOVA QMS + daha fazlası.</h2>
+        <p class="text-white/60 text-lg">
+          Ana ürünümüz NOVA QMS — IATF 16949 ve ISO 9001 uyumlu dijital kalite yönetimi.
+          Üzerine NOVA ERP ile entegrasyon: tek platform, tek veri, senkron akış.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="card rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-4">📄</div>
+          <h4 class="font-bold text-lg mb-2">Doküman & Prosedür</h4>
+          <p class="text-sm text-white/50">Versiyon kontrollü, tek kaynaktan güncel prosedürler ve kontrol planları.</p>
+        </div>
+        <div class="card rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-4">🔍</div>
+          <h4 class="font-bold text-lg mb-2">İç/Dış Denetim</h4>
+          <p class="text-sm text-white/50">Planlı denetimler, bulgu takibi, kapanış ve iyileştirme aksiyonları.</p>
+        </div>
+        <div class="card rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-4">⚠️</div>
+          <h4 class="font-bold text-lg mb-2">Uygunsuzluk & 8D</h4>
+          <p class="text-sm text-white/50">Kök neden analizi + CAPA ile düzeltici faaliyetler.</p>
+        </div>
+        <div class="card rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-4">📊</div>
+          <h4 class="font-bold text-lg mb-2">Yönetim Review</h4>
+          <p class="text-sm text-white/50">KPI, hedef ve toplantı için hazır raporlar.</p>
+        </div>
+        <div class="card rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-4">🎓</div>
+          <h4 class="font-bold text-lg mb-2">Eğitim & Yetkinlik</h4>
+          <p class="text-sm text-white/50">Çalışan eğitim, sertifika ve yetkinlik takibi.</p>
+        </div>
+        <div class="card rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-4">🎯</div>
+          <h4 class="font-bold text-lg mb-2">Risk & Fırsat</h4>
+          <p class="text-sm text-white/50">Süreç risk değerlendirmesi ve aksiyon planlaması.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== IATF 16949 ===================== -->
+  <section class="py-24 bg-gradient-to-b from-transparent to-transparent" style="--tw-gradient-from:rgba(255,107,26,0.05);background:radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,107,26,0.05), transparent 70%)">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="max-w-3xl mb-16 reveal">
+        <img src="logo-1.svg" alt="" class="h-14 w-auto mb-5" />
+        <span class="font-semibold text-sm tracking-wide uppercase" style="color:var(--nova-orange)">IATF 16949:2016 + ISO 9001</span>
+        <h2 class="text-4xl sm:text-6xl font-extrabold mt-3 mb-5 leading-tight">Otomotiv kalitenin<br>tüm checklist'i tek yerde.</h2>
+        <p class="text-white/60 text-lg">
+          IATF 16949 ve ISO 9001 gereksinimleri, AIAG çekirdek araçları (APQP, PPAP, FMEA, MSA, SPC)
+          platforma gömülü. Denetim gününü sevmeye başlayacaksın.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="card rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-3">🧩</div>
+          <h4 class="font-bold mb-1">APQP</h4>
+          <p class="text-sm text-white/50">Gelişmiş Ürün Kalite Planlaması — faz bazlı proje takibi.</p>
+        </div>
+        <div class="card rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-3">📦</div>
+          <h4 class="font-bold mb-1">PPAP</h4>
+          <p class="text-sm text-white/50">Üretim Parçası Onay Süreci — 18 öğenin dijital yönetimi.</p>
+        </div>
+        <div class="card rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-3">🛡️</div>
+          <h4 class="font-bold mb-1">FMEA</h4>
+          <p class="text-sm text-white/50">Hata Türü ve Etki Analizi — AIAG-VDA uyumlu.</p>
+        </div>
+        <div class="card rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-3">📐</div>
+          <h4 class="font-bold mb-1">MSA</h4>
+          <p class="text-sm text-white/50">Ölçüm Sistemi Analizi — Gage R&R.</p>
+        </div>
+        <div class="card rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-3">📈</div>
+          <h4 class="font-bold mb-1">SPC</h4>
+          <p class="text-sm text-white/50">İstatistiksel Proses Kontrolü — kontrol kartları, Cpk.</p>
+        </div>
+        <div class="card rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-3">🚩</div>
+          <h4 class="font-bold mb-1">Müşteri Şartları</h4>
+          <p class="text-sm text-white/50">CSR, spesifik gereksinim ve complaints yönetimi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== NOVA ERP (QMS'e entegrasyon) ===================== -->
+  <section id="erp" class="py-24">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="max-w-3xl mb-16 reveal">
+        <img src="logo-2.svg" alt="" class="h-14 w-auto mb-5" />
+        <span class="font-semibold text-sm tracking-wide uppercase" style="color:var(--nova-blue)">NOVA ERP · entegrasyon</span>
+        <h2 class="text-4xl sm:text-6xl font-extrabold mt-3 mb-5 leading-tight">NOVA QMS'e eklenebilen<br>tüm işin modülü.</h2>
+        <p class="text-white/60 text-lg">
+          Kalite zaten NOVA QMS'te. Üzerine NOVA ERP ile stok, muhasebe, üretim ve İK
+          ekleyip tek platformda birleştir. Kalite ve iş verisi birbiriyle senkron.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="card rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-4">📦</div>
+          <h4 class="font-bold text-lg mb-2">Stok & Tedarik</h4>
+          <p class="text-sm text-white/50">Gerçek zamanlı envanter ve tedarik zinciri.</p>
+        </div>
+        <div class="card rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-4">💰</div>
+          <h4 class="font-bold text-lg mb-2">Muhasebe & Finans</h4>
+          <p class="text-sm text-white/50">e-Fatura entegrasyonu, defter ve finans raporları.</p>
+        </div>
+        <div class="card rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-4">🤝</div>
+          <h4 class="font-bold text-lg mb-2">Satış & CRM</h4>
+          <p class="text-sm text-white/50">Müşteri, fırsat ve satış yönetimi.</p>
+        </div>
+        <div class="card rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-4">🏭</div>
+          <h4 class="font-bold text-lg mb-2">Üretim</h4>
+          <p class="text-sm text-white/50">Sipariş, reçete, iş emri ve üretim planlama.</p>
+        </div>
+        <div class="card rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-4">👥</div>
+          <h4 class="font-bold text-lg mb-2">İnsan Kaynakları</h4>
+          <p class="text-sm text-white/50">Bordro, performans ve personel yönetimi.</p>
+        </div>
+        <div class="card rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-4">📡</div>
+          <h4 class="font-bold text-lg mb-2">NOVA QMS entegrasyonu</h4>
+          <p class="text-sm text-white/50">Kalite verisi ERP ile senkron, tek raporlama.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section class="py-24 border-t border-white/5">
+    <div class="max-w-3xl mx-auto px-6 lg:px-8">
+      <h2 class="text-4xl sm:text-5xl font-extrabold mb-10 text-center reveal">Sıkça sorulan sorular</h2>
+      <div class="space-y-3">
+        <details class="card rounded-2xl p-6 reveal">
+          <summary class="font-semibold cursor-pointer flex justify-between items-center">İATF 16949 belgelendirmem garantili mi?<span class="text-white/50">+</span></summary>
+          <p class="mt-4 text-sm text-white/60">NOVA SUITE içinde NOVA QMS, IATF 16949 ve ISO 9001 gereksinimlerini dijital olarak destekler; ancak resmî belgelendirme akredite bir denetim kuruluşu tarafından yapılır.</p>
+        </details>
+        <details class="card rounded-2xl p-6 reveal">
+          <summary class="font-semibold cursor-pointer flex justify-between items-center">Verilerim güvende mi?<span class="text-white/50">+</span></summary>
+          <p class="mt-4 text-sm text-white/60">Şifreli depolama, rol bazlı yetki ve düzenli yedekleme ile veriler güvenlidir. Sunucu konumunu (TR/AB) seçebilirsin.</p>
+        </details>
+        <details class="card rounded-2xl p-6 reveal">
+          <summary class="font-semibold cursor-pointer flex justify-between items-center">ERP'yi sonradan ekleyebilir miyim?<span class="text-white/50">+</span></summary>
+          <p class="mt-4 text-sm text-white/60">Evet. NOVA QMS'i alıp NOVA ERP ile aynı NOVA SUITE çatısı altında entegre kullanabilirsin. Tüm modüller tek veri tabanı, tek platform.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SIGNUP ===================== -->
+  <section id="signup" class="py-24">
+    <div class="max-w-2xl mx-auto px-6 lg:px-8">
+      <div class="rounded-[2rem] nova-gradient p-10 text-center text-black reveal shadow-2xl" style="box-shadow:0 25px 50px -12px rgba(255,107,26,0.35)">
+        <img src="logo-1.svg" alt="" class="h-16 w-auto mx-auto mb-5" />
+        <h2 class="text-4xl sm:text-5xl font-extrabold mb-4">Bugün başla,<br>kalmaya değer.</h2>
+        <p class="text-black/70 mb-8 max-w-md mx-auto">Demo iste, ekibinle birlikte gör. İlk 30 gün ücretsiz.</p>
+        <form id="leadForm" class="space-y-3 text-left max-w-md mx-auto">
+          <input type="text" name="name" required placeholder="Ad Soyad"
+                 class="w-full rounded-full px-5 py-3.5 text-black bg-white/90 focus:outline-none focus:ring-2 focus:ring-black" />
+          <input type="email" name="email" required placeholder="E-posta"
+                 class="w-full rounded-full px-5 py-3.5 text-black bg-white/90 focus:outline-none focus:ring-2 focus:ring-black" />
+          <input type="tel" name="phone" placeholder="Telefon (opsiyonel)"
+                 class="w-full rounded-full px-5 py-3.5 text-black bg-white/90 focus:outline-none focus:ring-2 focus:ring-black" />
+          <select name="product" class="w-full rounded-full px-5 py-3.5 text-black bg-white/90 focus:outline-none focus:ring-2 focus:ring-black">
+            <option value="Suite">NOVA SUITE</option>
+            <option value="QMS">NOVA QMS (IATF 16949)</option>
+            <option value="ERP">NOVA ERP</option>
+            <option value="Her ikisi">Her ikisi</option>
+            <option value="Kararsız">Henüz karar vermedim</option>
+          </select>
+          <button type="submit" class="w-full bg-black text-white font-bold py-3.5 rounded-full transition hover:bg-black/80">
+            Ücretsiz Başla →
+          </button>
+        </form>
+        <div id="successMsg" class="hidden pt-6">
+          <div class="text-5xl mb-3">✅</div>
+          <h3 class="text-2xl font-extrabold mb-1">Hoş geldin!</h3>
+          <p class="text-black/70 text-sm">Başvurun alındı. En kısa sürede ulaşacağız.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="border-t border-white/5 pt-14 pb-8">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div class="lg:col-span-1">
+        <img src="logo-1.svg" alt="NOVA" class="h-8 w-auto mb-4" />
+        <p class="text-sm text-white/50 max-w-xs">IATF 16949 & ISO 9001 uyumlu kalite + ERP. Tek çatı, tek veri.</p>
+      </div>
+      <div>
+        <h4 class="font-bold mb-3 text-sm">Ürünler</h4>
+        <ul class="space-y-2 text-sm text-white/50">
+          <li><a href="#qms" class="hover:text-white transition">NOVA QMS</a></li>
+          <li><a href="#erp" class="hover:text-white transition">NOVA ERP</a></li>
+          <li><a href="#stdlib" class="hover:text-white transition">Standartlar</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold mb-3 text-sm">Şirket</h4>
+        <ul class="space-y-2 text-sm text-white/50">
+          <li><a href="#qms" class="hover:text-white transition">Hakkımızda</a></li>
+          <li><a href="#signup" class="hover:text-white transition">Demo</a></li>
+          <li><a href="#signup" class="hover:text-white transition">İletişim</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold mb-3 text-sm">Başla</h4>
+        <a href="#signup" class="nova-gradient inline-block text-black font-bold text-sm px-5 py-2.5 rounded-full hover:scale-105 transition">Ücretsiz Başla</a>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 mt-12 pt-6 border-t border-white/5 text-center text-xs text-white/40">
+      © <span id="year"></span> NOVA Software. Tüm hakları saklıdır.
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Scroll progress bar
+    const progress = document.getElementById('progress');
+    const onScroll = () => {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      progress.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+    };
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Scroll reveal
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('show'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+    // Lead -> Formspree (yayinda) veya mailto (yedek)
+    const FORMSPREE_ENDPOINT = ''; // https://formspree.io/f/xxxxxxxx seklinde doldur
+    const NOTIFY_EMAIL = 'mstfadur89@gmail.com';
+    document.getElementById('leadForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const data = {
+        name: e.target.name.value, email: e.target.email.value,
+        phone: e.target.phone.value, product: e.target.product.value
+      };
+      if (FORMSPREE_ENDPOINT) {
+        fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(data)
+        }).catch((err) => console.error('Lead gonderilemedi:', err));
+      }
+      document.getElementById('leadForm').classList.add('hidden');
+      document.getElementById('successMsg').classList.remove('hidden');
+    });
+  </script>
+</body>
+</html>

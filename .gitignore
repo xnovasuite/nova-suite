@@ -1,0 +1,11 @@
+# Yalnizca statik site yayini (GitHub Pages)
+# Backend / yerel calistirma dosyalari repoya gerekmez
+server.py
+start.bat
+leads.json
+*.log
+__pycache__/
+.python-version
+
+# Zed editor yerel ayetleri
+.zed/
