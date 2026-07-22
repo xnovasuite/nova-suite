@@ -3,9 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nova — Kalite & Kaynak Yönetimi Platformu</title>
-  <meta name="description" content="Nova ile kalite yönetimi (IATF 16949, ISO 9001) ve kurumsal kaynak planlamayı tek platformda birleştirin." />
+  <title>NOVA SUITE — IATF 16949 & ISO 9001 Uyumlu Kalite ve ERP Platformu</title>
+  <meta name="description" content="NOVA QMS ile IATF 16949 ve ISO 9001 uyumlu dijital kalite yönetimi. İsteyene NOVA ERP ile entegrasyon. Tek çatı, tek veri, tek platform. 15 günlük ücretsiz demo." />
+  <meta name="keywords" content="NOVA, NOVA QMS, NOVA ERP, NOVA SUITE, IATF 16949, ISO 9001, kalite yönetim sistemi, APQP, PPAP, FMEA, MSA, SPC, ERP, otomotiv kalite" />
+  <meta name="author" content="NOVA Software" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://xnovasuite.github.io/nova-suite/" />
   <link rel="icon" type="image/svg+xml" href="logo-1.svg" />
+
+  <!-- ===================== Open Graph / Sosyal Paylasim (A) ===================== -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="NOVA SUITE" />
+  <meta property="og:title" content="NOVA SUITE — Kaliteyi dijitalleştir, isi tek çatıya al" />
+  <meta property="og:description" content="IATF 16949 & ISO 9001 uyumlu dijital kalite yönetimi + ERP. 15 günlük ücretsiz demo, kart bilgisi gerekmez." />
+  <meta property="og:url" content="https://xnovasuite.github.io/nova-suite/" />
+  <meta property="og:image" content="https://xnovasuite.github.io/nova-suite/logo-1.svg" />
+  <meta property="og:locale" content="tr_TR" />
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="NOVA SUITE — Kaliteyi dijitalleştir" />
+  <meta name="twitter:description" content="IATF 16949 & ISO 9001 uyumlu QMS + ERP. 15 günlük ücretsiz demo." />
+  <meta name="twitter:image" content="https://xnovasuite.github.io/nova-suite/logo-1.svg" />
+
+  <!-- ===================== Google Analytics 4 — GA4 (B) ===================== -->
+  <!-- G-XXXXXXXXXX yerine kendi GA4 Ölçüm Kimliğinizi yazin (analytics.google.com) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX', { send_page_view: true });
+  </script>
+
+  <!-- ===================== Meta (Facebook) Pixel — (B) ===================== -->
+  <!-- 000000000000000 yerine kendi Pixel ID'nizi yazin (business.facebook.com -> Etkinlik Yöneticisi) -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '000000000000000');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=000000000000000&ev=PageView&noscript=1"/></noscript>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -377,6 +422,12 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
+    // CTA klik takibi (GA4 + Pixel) — butonlara onclick ile cagrilabilir
+    function trackCTA(label) {
+      if (window.gtag) { gtag('event', 'cta_click', { button_label: label }); }
+      if (window.fbq) { fbq('track', 'Lead', { content_name: label }); }
+    }
+
     // Scroll progress bar
     const progress = document.getElementById('progress');
     const onScroll = () => {
@@ -408,6 +459,9 @@
           body: JSON.stringify(data)
         }).catch((err) => console.error('Lead gonderilemedi:', err));
       }
+      // --- Donusum etkinlikleri (GA4 + Meta Pixel) ---
+      if (window.gtag) { gtag('event', 'generate_lead', { currency: 'TRY', value: 1.0 }); }
+      if (window.fbq) { fbq('track', 'Lead'); }
       document.getElementById('leadForm').classList.add('hidden');
       document.getElementById('successMsg').classList.remove('hidden');
     });
