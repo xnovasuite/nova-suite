@@ -92,6 +92,8 @@
     .progress { position:fixed; top:0; left:0; height:3px; width:0%; background:linear-gradient(90deg,var(--nova-orange),var(--nova-blue)); z-index:60; }
     /* Logo on plan */
     .logo-featured { filter: drop-shadow(0 12px 40px rgba(30,107,255,0.18)); }
+    /* Signup kartında beyaz logo (gradient zeminde) */
+    .logo-white { filter: brightness(0) invert(1); }
     /* "YAKINDA" éétiketi */
     .badge-soon { position:absolute; top:14px; right:14px; background:var(--nova-orange); color:#fff; font-size:11px; font-weight:800; letter-spacing:.08em; padding:4px 10px; border-radius:999px; z-index:2; box-shadow:0 4px 12px rgba(255,107,26,0.35); }
     .erp-card { position:relative; }
@@ -371,7 +373,7 @@
   <section id="signup" class="py-24">
     <div class="max-w-2xl mx-auto px-6 lg:px-8">
       <div class="rounded-[2rem] nova-gradient p-10 text-center text-black reveal shadow-2xl" style="box-shadow:0 25px 50px -12px rgba(255,107,26,0.35)">
-        <img src="logo-1.svg" alt="" class="h-16 w-auto mx-auto mb-5" />
+        <img src="logo-1.svg" alt="NOVA" class="logo-white h-16 w-auto mx-auto mb-5" />
         <span class="inline-block bg-black/15 text-black text-xs font-bold px-4 py-1.5 rounded-full mb-5">15 GÜNLÜK ÜCRETSİZ DEMO</span>
         <h2 class="text-4xl sm:text-5xl font-extrabold mb-4">Bugün başla,<br>kalmaya değer.</h2>
         <p class="text-black/70 mb-8 max-w-md mx-auto">Demo iste, ekibinle birlikte gör. 15 gün ücretsiz, kart bilgisi gerekmez.</p>
