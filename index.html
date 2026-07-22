@@ -87,6 +87,9 @@
     .progress { position:fixed; top:0; left:0; height:3px; width:0%; background:linear-gradient(90deg,var(--nova-orange),var(--nova-blue)); z-index:60; }
     /* Logo on plan */
     .logo-featured { filter: drop-shadow(0 12px 40px rgba(30,107,255,0.18)); }
+    /* "YAKINDA" éétiketi */
+    .badge-soon { position:absolute; top:14px; right:14px; background:var(--nova-orange); color:#fff; font-size:11px; font-weight:800; letter-spacing:.08em; padding:4px 10px; border-radius:999px; z-index:2; box-shadow:0 4px 12px rgba(255,107,26,0.35); }
+    .erp-card { position:relative; }
   </style>
 </head>
 <body class="antialiased">
@@ -102,8 +105,7 @@
       <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
         <a href="#qms" class="hover:text-slate-900 transition">NOVA QMS</a>
         <a href="#stdlib" class="hover:text-slate-900 transition">Standartlar</a>
-        <a href="#erp" class="hover:text-slate-900 transition">NOVA ERP</a>
-      </nav>
+        <a href="#erp" class="hover:text-slate-900 transition inline-flex items-center gap-1.5">NOVA ERP <span class="text-[10px] font-bold px-1.5 py-0.5 rounded-full" style="background:var(--nova-orange);color:#fff">YAKINDA</span></a>
       <a href="#signup" class="nova-gradient text-slate-900 text-sm font-bold px-6 py-2.5 rounded-full transition hover:scale-105">
         Ücretsiz Başla
       </a>
@@ -276,40 +278,49 @@
       <div class="max-w-3xl mb-16 reveal">
         <img src="logo-2.svg" alt="" class="h-14 w-auto mb-5" />
         <span class="font-semibold text-sm tracking-wide uppercase" style="color:var(--nova-blue)">NOVA ERP · entegrasyon</span>
+        <span class="badge-soon" style="position:static; display:inline-block; margin-left:10px; vertical-align:middle">YAKINDA</span>
         <h2 class="text-4xl sm:text-6xl font-extrabold mt-3 mb-5 leading-tight">NOVA QMS'e eklenebilen<br>tüm işin modülü.</h2>
         <p class="text-slate-600 text-lg">
           Kalite zaten NOVA QMS'te. Üzerine NOVA ERP ile stok, muhasebe, üretim ve İK
           ekleyip tek platformda birleştir. Kalite ve iş verisi birbiriyle senkron.
         </p>
+        <p class="text-sm mt-4 font-semibold" style="color:var(--nova-blue)">↪ NOVA ERP şu an hazırlık aşamasında — yakında.
+        </p>
       </div>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        <div class="card rounded-2xl p-6 reveal">
+        <div class="card erp-card rounded-2xl p-6 reveal">
+          <span class="badge-soon">YAKINDA</span>
           <div class="text-3xl mb-4">📦</div>
           <h4 class="font-bold text-lg mb-2">Stok & Tedarik</h4>
           <p class="text-sm text-slate-500">Gerçek zamanlı envanter ve tedarik zinciri.</p>
         </div>
-        <div class="card rounded-2xl p-6 reveal">
+        <div class="card erp-card rounded-2xl p-6 reveal">
+          <span class="badge-soon">YAKINDA</span>
           <div class="text-3xl mb-4">💰</div>
           <h4 class="font-bold text-lg mb-2">Muhasebe & Finans</h4>
           <p class="text-sm text-slate-500">e-Fatura entegrasyonu, defter ve finans raporları.</p>
         </div>
-        <div class="card rounded-2xl p-6 reveal">
+        <div class="card erp-card rounded-2xl p-6 reveal">
+          <span class="badge-soon">YAKINDA</span>
           <div class="text-3xl mb-4">🤝</div>
           <h4 class="font-bold text-lg mb-2">Satış & CRM</h4>
           <p class="text-sm text-slate-500">Müşteri, fırsat ve satış yönetimi.</p>
         </div>
-        <div class="card rounded-2xl p-6 reveal">
+        <div class="card erp-card rounded-2xl p-6 reveal">
+          <span class="badge-soon">YAKINDA</span>
           <div class="text-3xl mb-4">🏭</div>
           <h4 class="font-bold text-lg mb-2">Üretim</h4>
           <p class="text-sm text-slate-500">Sipariş, reçete, iş emri ve üretim planlama.</p>
         </div>
-        <div class="card rounded-2xl p-6 reveal">
+        <div class="card erp-card rounded-2xl p-6 reveal">
+          <span class="badge-soon">YAKINDA</span>
           <div class="text-3xl mb-4">👥</div>
           <h4 class="font-bold text-lg mb-2">İnsan Kaynakları</h4>
           <p class="text-sm text-slate-500">Bordro, performans ve personel yönetimi.</p>
         </div>
-        <div class="card rounded-2xl p-6 reveal">
+        <div class="card erp-card rounded-2xl p-6 reveal">
+          <span class="badge-soon">YAKINDA</span>
           <div class="text-3xl mb-4">📡</div>
           <h4 class="font-bold text-lg mb-2">NOVA QMS entegrasyonu</h4>
           <p class="text-sm text-slate-500">Kalite verisi ERP ile senkron, tek raporlama.</p>
@@ -340,8 +351,8 @@
           <p class="mt-4 text-sm text-slate-600">Evet. Veriler şifreli (TLS + at-rest) depolanır, rol bazlı yetkilendirme uygulanır ve düzenli olarak yedeklenir. Sunucu konumunu (Türkiye / AB) tercih edebilirsiniz.</p>
         </details>
         <details class="card rounded-2xl p-6 reveal">
-          <summary class="font-semibold cursor-pointer flex justify-between items-center">ERP'yi sonradan ekleyebilir miyim?<span class="text-slate-500">+</span></summary>
-          <p class="mt-4 text-sm text-slate-600">Evet. NOVA QMS ile başlayıp istediğiniz an NOVA ERP modülünü ekleyebilirsiniz. İkisi de aynı NOVA SUITE çatısı altında, tek veri tabanı, tek platform; veri taşımaya gerek yok.</p>
+          <summary class="font-semibold cursor-pointer flex justify-between items-center">NOVA ERP ne zaman hazır olacak?<span class="text-slate-500">+</span></summary>
+          <p class="mt-4 text-sm text-slate-600">NOVA ERP şu an hazırlık aşamasında. Önce NOVA QMS ile başlayıp istediğiniz an NOVA ERP modülünü ekleyebilirsiniz. İkisi de aynı NOVA SUITE çatısı altında, tek veri tabanı, tek platform; veri taşımaya gerek yok. Gelince sizi haberdar ederiz.</p>
         </details>
         <details class="card rounded-2xl p-6 reveal">
           <summary class="font-semibold cursor-pointer flex justify-between items-center">Mevcut sistemimden veri taşıyabilir miyim?<span class="text-slate-500">+</span></summary>
@@ -397,7 +408,7 @@
         <h4 class="font-bold mb-3 text-sm">Ürünler</h4>
         <ul class="space-y-2 text-sm text-slate-500">
           <li><a href="#qms" class="hover:text-slate-900 transition">NOVA QMS</a></li>
-          <li><a href="#erp" class="hover:text-slate-900 transition">NOVA ERP</a></li>
+          <li><a href="#erp" class="hover:text-slate-900 transition inline-flex items-center gap-1.5">NOVA ERP <span class="text-[10px] font-bold px-1.5 py-0.5 rounded-full" style="background:var(--nova-orange);color:#fff">YAKINDA</span></a></li>
           <li><a href="#stdlib" class="hover:text-slate-900 transition">Standartlar</a></li>
         </ul>
       </div>
