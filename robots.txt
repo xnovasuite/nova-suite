@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://xnovasuite.github.io/nova-suite/sitemap.xml

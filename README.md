@@ -37,8 +37,31 @@ git push               # GitHub Pages ~30 sn içinde günceller
 - Bildirim e-postası: Formspree panelinden gelir (kayıtlı mail)
 
 ## Takip kodları
-- **GA4:** `index.html` içinde `G-XXXXXXXXXX` → kendi ölçüm kimliğinizle değiştirin
-- **Meta Pixel:** `000000000000000` → kendi Pixel ID'nizle değiştirin
+**Mevcut durum:** Kodlar yerleşti ama placeholder kimlikle. Veri toplanması için kendi kimliklerinizi alıp değiştirmeniz gerekir.
+
+### GA4 (Google Analytics 4) — ücretsiz
+1. https://analytics.google.com → Google hesabıyla giriş
+2. Yeni hesap/property oluştur → **Veri akışı** → **Web**
+3. Site URL: `https://xnovasuite.github.io/nova-suite/`
+4. Size verilen **Ölçüm Kimliği**ni kopyalayın (`G-XXXXXXXXXX` formatında)
+5. `index.html` içinde **2 yerde** `G-XXXXXXXXXX` geçiyor — ikisini de gerçek kimlikle değiştirin:
+   - `<script async src=...id=G-XXXXXXXXXX>`
+   - `gtag('config', 'G-XXXXXXXXXX', ...)`
+
+### Meta Pixel (Facebook/Instagram) — ücretsiz
+1. https://business.facebook.com → Etkinlik Yöneticisi → **Veri Kaynağı** → **Pixel**
+2. Yeni Pixel oluştur → site URL gir
+3. Size verilen **Pixel ID**'yi kopyalayın (15 haneli sayı)
+4. `index.html` içinde **2 yerde** `000000000000000` geçiyor — ikisini de değiştirin:
+   - `fbq('init', '000000000000000');`
+   - `<img ... src="https://www.facebook.com/tr?id=000000000000000&ev=PageView&noscript=1"/>`
+
+> Kimlikleri bana verirseniz, ben de doldurup push edebilirim.
+
+## SEO dosyaları
+- `sitemap.xml` — Google'a site haritası
+- `robots.txt` — tarayıcı izinleri + sitemap referansı
+- Submit: https://search.google.com/search-console → site ekle → sitemap gönder
 
 ## Renk paleti
 - Turuncu: `#FF6B1A`
